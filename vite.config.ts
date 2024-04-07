@@ -24,6 +24,13 @@ export default defineConfig(({ mode }) => {
           clientPort: Number(env.VITE_PORT),
           host: env.VITE_HOST,
       },
-    }
+    },
+    css: {
+      preprocessorOptions: {
+          scss: {
+              additionalData: `@import "@/assets/scss/general.scss";`,
+          },
+      },
+  },
   }
 })
