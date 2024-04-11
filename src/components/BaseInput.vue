@@ -1,8 +1,11 @@
 <script setup lang="ts">
+	type InputType = 'text' | 'password';
+	
 	interface BaseInputProps {
 		id: string;
 		name: string;
 		label: string;
+		type: InputType;
 	}
 
 	const props = defineProps<BaseInputProps>()
@@ -11,7 +14,7 @@
 <template>
 	<div class="input-container">
 		<label :for="name">{{ label }}</label>
-		<input type="text" :id="id" :name="name">
+		<input :type="type" :id="id" :name="name">
 	</div>
 </template>
 
@@ -28,7 +31,7 @@
 		}
 
 		input {
-			padding: 10px 0;
+			padding: 10px 5px 10px;
 			margin-top: 10px;
 			border: 1px solid gainsboro;
 		}

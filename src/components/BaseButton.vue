@@ -16,8 +16,8 @@
 </template>
 <style scoped lang="scss">
   %button-shared {
-    border-radius: 10px;
-    padding: 10px 40px;
+    border-radius: 6px;
+    padding: 15px 60px;
     border: none;
     cursor: pointer;
   }

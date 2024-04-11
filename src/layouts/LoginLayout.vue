@@ -7,7 +7,7 @@
 </template>
 <style scoped lang="scss">
   #login-container {
-    height: 100vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,8 +16,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 350px;
-      gap: 20px;
+      width: 420px;
+      gap: 40px;
     }
   }
 </style>
