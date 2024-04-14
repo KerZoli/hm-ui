@@ -8,13 +8,15 @@
 		type: InputType;
 	}
 
-	const props = defineProps<BaseInputProps>()
+	defineProps<BaseInputProps>()
+	
+	const model = defineModel()
 </script>
 
 <template>
 	<div class="input-container">
 		<label :for="name">{{ label }}</label>
-		<input :type="type" :id="id" :name="name">
+		<input v-model="model" :type="type" :id="id" :name="name">
 	</div>
 </template>
 

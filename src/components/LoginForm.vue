@@ -1,17 +1,30 @@
 <script setup lang="ts">
-	import BaseInput from '../components/BaseInput.vue';
-	import BaseButton from '../components/BaseButton.vue';
-	import BaseLink from '../components/BaseLink.vue';
+	import { reactive } from 'vue';
 
-	const submit = () => console.log('Submit clicked');
+	import BaseInput from '@/components/BaseInput.vue';
+	import BaseButton from '@/components/BaseButton.vue';
+	import BaseLink from '@/components/BaseLink.vue';
+	
+	import { useAuthStore } from '@/stores/auth';
+
+	const userForm = reactive({
+		email: '',
+		password: ''
+	});
+	
+	const authStore = useAuthStore();	
+
+	const login = () => {
+		authStore.login(userForm);
+	}
 
 </script>
 
 <template>
   <section class="login-form">
 		<div class="input-elements">
-			<BaseInput type="text" id="username" name="username" label="Username"></BaseInput>
-			<BaseInput type="password" id="password" name="pasword" label="Password"></BaseInput>
+			<BaseInput v-model="userForm.email" type="text" id="username" name="username" label="Username"></BaseInput>
+			<BaseInput v-model="userForm.password" type="password" id="password" name="pasword" label="Password"></BaseInput>
 		</div>
 		<p>Don't have an account? Please <router-link :to="{name: 'register'}">register</router-link>.</p>
 		<div class="action-buttons">
@@ -19,7 +32,7 @@
 				<BaseLink class="flex-item" name="register">Register</BaseLink>
 			</div>
 			<div class="flex-item">
-				<BaseButton type="primary" @click="submit">Login</BaseButton>
+				<BaseButton type="primary" @click="login">Login</BaseButton>
 			</div>
 		</div>
 	</section>
