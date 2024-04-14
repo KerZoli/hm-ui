@@ -1,4 +1,7 @@
 <script setup lang="ts">
+	import { computed } from 'vue';
+	import type { ErrorObject } from '@vuelidate/core';
+
 	type InputType = 'text' | 'password';
 	
 	interface BaseInputProps {
@@ -6,17 +9,19 @@
 		name: string;
 		label: string;
 		type: InputType;
+		errors?: ErrorObject[]; 
 	}
 
-	defineProps<BaseInputProps>()
-	
+	const props = defineProps<BaseInputProps>()
+	const hasError = computed(() => props.errors && props.errors.length)
 	const model = defineModel()
 </script>
 
 <template>
 	<div class="input-container">
 		<label :for="name">{{ label }}</label>
-		<input v-model="model" :type="type" :id="id" :name="name">
+		<input v-model="model" :type="type" :id="id" :name="name" :class="{error: hasError}">
+		<p class="error-msg" v-if="hasError"> {{ errors![0].$message }}</p>
 	</div>
 </template>
 
