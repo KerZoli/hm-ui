@@ -11,7 +11,6 @@
 		type: InputType;
 		errors?: ErrorObject[]; 
 	}
-
 	const props = defineProps<BaseInputProps>()
 	const hasError = computed(() => props.errors && props.errors.length)
 	const model = defineModel()
@@ -21,7 +20,7 @@
 	<div class="input-container">
 		<label :for="name">{{ label }}</label>
 		<input v-model="model" :type="type" :id="id" :name="name" :class="{error: hasError}">
-		<p class="error-msg" v-if="hasError"> {{ errors![0].$message }}</p>
+		<span class="error-msg"> {{ hasError ? errors![0].$message : '&nbsp;' }}</span>
 	</div>
 </template>
 

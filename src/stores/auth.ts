@@ -6,7 +6,6 @@ import type { UserLoginData } from "@/types/UserLoginData";
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null);
 
-
   function initCsrfProtection() {
     const execute = useHttp()
 
@@ -25,7 +24,6 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(userloginData: UserLoginData) {
     await initCsrfProtection()
     const { data } = await sendLogin(userloginData)
-    console.log(data.value)
   }
 
   return { login }
