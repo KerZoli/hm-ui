@@ -39,9 +39,15 @@ export const useAuthStore = defineStore(
       loading.value = false
     }
 
-    async function logout() {}
+    async function logout() {
+      const { axiosError } = await fetchData({
+        method: 'POST',
+        url: 'logout'
+      })
+      error.value = axiosError?.message
+    }
 
-    return { login, user, error, loading }
+    return { login, logout, user, error, loading }
   },
   {
     persist: {}
