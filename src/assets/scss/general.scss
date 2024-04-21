@@ -1,11 +1,11 @@
-@use "variables" as *;
-@forward "variables";
+@use 'variables' as *;
+@forward 'variables';
 
 .error-msg {
-    color: $error-color;
-    margin-top: 5px;
+  color: $error-color;
+  margin-top: 5px;
 }
 
 .form .error {
-    border-color: $error-color;
+  border-color: $error-color;
 }

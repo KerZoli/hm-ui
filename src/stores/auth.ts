@@ -1,30 +1,49 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
-import { useHttp } from "@/utils/http";
-import type { UserLoginData } from "@/types/UserLoginData";
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+import type { IUserLoginData } from '@/interfaces/IUserLoginData'
+import type { IUser } from '@/interfaces/IUser'
+import fetchData from '@/utils/fetchData'
 
-export const useAuthStore = defineStore('auth', () => {
-  const user = ref(null);
+export const useAuthStore = defineStore(
+  'auth',
+  () => {
+    const user = ref<IUser | null>(null)
+    const error = ref<string | undefined>()
+    const loading = ref(false)
 
-  function initCsrfProtection() {
-    const execute = useHttp()
+    function initCsrfProtection() {
+      return fetchData(
+        {
+          url: '/sanctum/csrf-cookie'
+        },
+        false
+      )
+    }
 
-    return execute('/sanctum/csrf-cookie')
-  }  
+    function sendLogin(userloginData: IUserLoginData) {
+      return fetchData<IUserLoginData, IUser>({
+        method: 'POST',
+        url: 'login',
+        data: userloginData
+      })
+    }
 
-  function sendLogin(userloginData: UserLoginData) {
-    const execute = useHttp()
+    async function login(userloginData: IUserLoginData) {
+      loading.value = true
+      const { axiosError } = await initCsrfProtection()
+      if (!axiosError) {
+        const { data, axiosError } = await sendLogin(userloginData)
+        user.value = data
+        error.value = axiosError?.message
+      }
+      loading.value = false
+    }
 
-    return execute('api/v1/login', {
-      method: "POST",
-      data: userloginData
-    })
+    async function logout() {}
+
+    return { login, user, error, loading }
+  },
+  {
+    persist: {}
   }
-
-  async function login(userloginData: UserLoginData) {
-    await initCsrfProtection()
-    const { data } = await sendLogin(userloginData)
-  }
-
-  return { login }
-})
+)
