@@ -64,7 +64,7 @@ const loginUser = async () => {
           <BaseLink class="flex-item" name="register">Register</BaseLink>
         </div>
         <div class="flex-item">
-          <BaseButton type="primary">Login</BaseButton>
+          <BaseButton type="submit" bStyle="primary">Login</BaseButton>
         </div>
       </div>
     </form>

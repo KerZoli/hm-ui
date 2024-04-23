@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { IUserLoginData } from '@/interfaces/IUserLoginData'
 import type { IUser } from '@/interfaces/IUser'
@@ -10,6 +10,8 @@ export const useAuthStore = defineStore(
     const user = ref<IUser | null>(null)
     const error = ref<string | undefined>()
     const loading = ref(false)
+
+    const isAuthenticated = computed(() => !!user.value)
 
     function initCsrfProtection() {
       return fetchData(
@@ -26,6 +28,12 @@ export const useAuthStore = defineStore(
         url: 'login',
         data: userloginData
       })
+    }
+
+    function resetStore() {
+      user.value = null
+      error.value = undefined
+      loading.value = false
     }
 
     async function login(userloginData: IUserLoginData) {
@@ -45,9 +53,12 @@ export const useAuthStore = defineStore(
         url: 'logout'
       })
       error.value = axiosError?.message
+      if (!error.value) {
+        resetStore()
+      }
     }
 
-    return { login, logout, user, error, loading }
+    return { login, logout, resetStore, user, isAuthenticated, error, loading }
   },
   {
     persist: {}

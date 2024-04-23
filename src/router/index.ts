@@ -4,18 +4,26 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/LoginView.vue')
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/RegisterView.vue')
+    path: '',
+    name: 'auth',
+    meta: { requiresAuth: false },
+    children: [
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/LoginView.vue')
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/views/RegisterView.vue')
+      }
+    ]
   },
   {
     path: '/dashboard',
     name: 'dashboard',
+    meta: { requiresAuth: true },
     component: () => import('@/views/DashboardView.vue')
   }
 ]
@@ -27,10 +35,14 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const authStore = useAuthStore()
-  const { user } = storeToRefs(authStore)
+  const { isAuthenticated } = storeToRefs(authStore)
 
-  if (!user.value && to.name !== 'login') {
+  if (!isAuthenticated && to.meta.requiresAuth) {
     return { name: 'login' }
+  }
+
+  if (isAuthenticated && !to.meta.requiresAuth) {
+    return { name: 'dashboard' }
   }
 })
 
