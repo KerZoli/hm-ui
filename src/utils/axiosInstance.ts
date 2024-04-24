@@ -17,14 +17,15 @@ export default function getAxiosInstance(appendApiUrl = true) {
   })
 
   axiosInstance.interceptors.response.use(
-    (response) => {
-      if (response.status === 419) {
+    (response) => response,
+    (error) => {
+      if (error.response.status === 419) {
         resetStore()
+        notificationError('Session expired.')
+
+        return Promise.reject(error)
       }
 
-      return response
-    },
-    (error) => {
       notificationError(error.response?.data?.message ?? 'Something went wrong. Please try again.')
 
       return Promise.reject(error)

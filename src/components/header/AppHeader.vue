@@ -2,6 +2,8 @@
 import NavigationList from '@/components/header/navigation/NavigationList.vue'
 </script>
 <template>
-  <NavigationList />
+  <header>
+    <NavigationList />
+  </header>
 </template>
 <style lang="scss"></style>

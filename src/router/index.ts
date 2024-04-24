@@ -37,11 +37,11 @@ router.beforeEach(async (to) => {
   const authStore = useAuthStore()
   const { isAuthenticated } = storeToRefs(authStore)
 
-  if (!isAuthenticated && to.meta.requiresAuth) {
+  if (to.name !== 'login' && !isAuthenticated.value && to.meta.requiresAuth) {
     return { name: 'login' }
   }
 
-  if (isAuthenticated && !to.meta.requiresAuth) {
+  if (isAuthenticated.value && !to.meta.requiresAuth) {
     return { name: 'dashboard' }
   }
 })

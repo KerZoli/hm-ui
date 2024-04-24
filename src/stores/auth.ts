@@ -1,5 +1,7 @@
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
+
 import type { IUserLoginData } from '@/interfaces/IUserLoginData'
 import type { IUser } from '@/interfaces/IUser'
 import fetchData from '@/utils/fetchData'
@@ -10,6 +12,7 @@ export const useAuthStore = defineStore(
     const user = ref<IUser | null>(null)
     const error = ref<string | undefined>()
     const loading = ref(false)
+    const router = useRouter()
 
     const isAuthenticated = computed(() => !!user.value)
 
@@ -48,14 +51,13 @@ export const useAuthStore = defineStore(
     }
 
     async function logout() {
-      const { axiosError } = await fetchData({
+      await fetchData({
         method: 'POST',
         url: 'logout'
       })
-      error.value = axiosError?.message
-      if (!error.value) {
-        resetStore()
-      }
+
+      resetStore()
+      router.push({ name: 'login' })
     }
 
     return { login, logout, resetStore, user, isAuthenticated, error, loading }

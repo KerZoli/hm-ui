@@ -3,21 +3,21 @@
     <div id="login-layout">
       <slot></slot>
     </div>
-</section>
+  </section>
 </template>
 <style scoped lang="scss">
-  #login-container {
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#login-container {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    #login-layout {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 420px;
-      gap: 40px;
-    }
+  #login-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 420px;
+    gap: 40px;
   }
+}
 </style>

@@ -26,7 +26,7 @@ const loginUser = async () => {
   const isFormValid = await v$.value.$validate()
 
   if (isFormValid) {
-    login(loginForm)
+    await login(loginForm)
     if (!error.value) {
       router.push({ name: 'dashboard' })
     }
