@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @forward 'variables';
+@forward 'breakpoints';
 
 .error-msg {
   color: $error-color;

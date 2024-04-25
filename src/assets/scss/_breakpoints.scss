@@ -1,0 +1,28 @@
+$break-small: 480px;
+$break-medium: 768px;
+$break-large: 1024px;
+$break-xlarge: 1280px;
+
+@mixin bp-small {
+  @media (min-width: $break-small) {
+    @content;
+  }
+}
+
+@mixin bp-medium {
+  @media (min-width: $break-medium) {
+    @content;
+  }
+}
+
+@mixin bp-large {
+  @media (min-width: $break-large) {
+    @content;
+  }
+}
+
+@mixin bp-xlarge {
+  @media (min-width: $break-xlarge) {
+    @content;
+  }
+}

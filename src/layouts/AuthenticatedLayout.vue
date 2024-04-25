@@ -3,6 +3,13 @@ import AppHeader from '@/components/header/AppHeader.vue'
 </script>
 <template>
   <AppHeader />
-  <slot></slot>
+  <section id="content">
+    <slot></slot>
+  </section>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#content {
+  max-width: 1268px;
+  margin: 0 auto;
+}
+</style>

@@ -8,4 +8,9 @@ defineProps<NavigationItemProps>()
 <template>
   <router-link :to="{ name: name }"><slot></slot></router-link>
 </template>
-<style scoped></style>
+<style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: $primary-text-color;
+}
+</style>
