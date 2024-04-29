@@ -6,7 +6,7 @@ const { logout } = useAuthStore()
 </script>
 <template>
   <nav class="navigation">
-    <NavigationItem name="dashboard">Home</NavigationItem>
+    <NavigationItem name="dashboard">Dashboard</NavigationItem>
     <NavigationItem>My Account</NavigationItem>
     <NavigationItem>My Account</NavigationItem>
     <NavigationItem>My Account</NavigationItem>

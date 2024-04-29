@@ -5,7 +5,7 @@ import LoginLayout from '@/layouts/LoginLayout.vue'
 </script>
 <template>
   <LoginLayout>
-    <PageTitle>Welcome to Hotel Management System, please login!</PageTitle>
+    <PageTitle>Welcome to Hotel Reservation System, please login!</PageTitle>
     <LoginForm />
   </LoginLayout>
 </template>

@@ -1,6 +1,13 @@
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import { createRouter, createWebHistory } from 'vue-router'
+import { useVerifyEmail } from '@/composables/useVerifyEmail'
+
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized
+} from 'vue-router'
 
 const routes = [
   {
@@ -25,6 +32,23 @@ const routes = [
     name: 'dashboard',
     meta: { requiresAuth: true },
     component: () => import('@/views/DashboardView.vue')
+  },
+  {
+    path: 'verify-email/:url',
+    name: 'email-verify',
+    component: () => {},
+    beforeEnter: async (
+      to: RouteLocationNormalized,
+      from: RouteLocationNormalized,
+      next: NavigationGuardNext
+    ) => {
+      const { validateEmail } = useVerifyEmail(to.params.url as string)
+
+      const isValid = await validateEmail()
+      if (isValid) {
+        next({ name: 'dashboard' })
+      }
+    }
   }
 ]
 

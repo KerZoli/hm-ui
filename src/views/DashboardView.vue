@@ -6,8 +6,17 @@ const authStore = useAuthStore()
 </script>
 <template>
   <AuthenticatedLayout>
-    <p>{{ authStore.user?.name }}</p>
-    <p>{{ authStore.user?.email }}</p>
+    <section id="dashboard-section">
+      <h2>Welcome</h2>
+      <p>{{ authStore.user?.name }}</p>
+      <p>{{ authStore.user?.email }}</p>
+    </section>
   </AuthenticatedLayout>
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+#dashboard-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+</style>
