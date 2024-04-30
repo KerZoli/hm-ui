@@ -16,6 +16,8 @@ export const useAuthStore = defineStore(
 
     const isAuthenticated = computed(() => !!user.value)
 
+    const isVerified = computed(() => user.value && user.value.is_verified === true)
+
     function initCsrfProtection() {
       return fetchData(
         {
@@ -60,7 +62,7 @@ export const useAuthStore = defineStore(
       router.push({ name: 'login' })
     }
 
-    return { login, logout, resetStore, user, isAuthenticated, error, loading }
+    return { login, logout, resetStore, user, isAuthenticated, isVerified, error, loading }
   },
   {
     persist: {}

@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 
+import EmailConfirmation from '@/components/EmailConfirmation.vue'
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue'
+import { storeToRefs } from 'pinia'
+
 const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 </script>
 <template>
   <AuthenticatedLayout>
     <section id="dashboard-section">
       <h2>Welcome</h2>
-      <p>{{ authStore.user?.name }}</p>
-      <p>{{ authStore.user?.email }}</p>
+      <p>{{ user?.name }}</p>
+    </section>
+    <section id="email-confirmation">
+      <EmailConfirmation />
     </section>
   </AuthenticatedLayout>
 </template>

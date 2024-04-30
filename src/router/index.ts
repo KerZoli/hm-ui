@@ -34,20 +34,31 @@ const routes = [
     component: () => import('@/views/DashboardView.vue')
   },
   {
-    path: 'verify-email/:url',
+    path: '/verify-email',
     name: 'email-verify',
+    meta: { requiresAuth: true },
     component: () => {},
     beforeEnter: async (
       to: RouteLocationNormalized,
       from: RouteLocationNormalized,
       next: NavigationGuardNext
     ) => {
-      const { validateEmail } = useVerifyEmail(to.params.url as string)
+      const authStore = useAuthStore()
+      const { isVerified } = storeToRefs(authStore)
 
+      if (isVerified.value) {
+        next({ name: 'dashboard' })
+        return
+      }
+
+      const { validateEmail } = useVerifyEmail(to.query)
       const isValid = await validateEmail()
+
       if (isValid) {
         next({ name: 'dashboard' })
       }
+
+      next({ name: 'resend-email-verification' })
     }
   }
 ]

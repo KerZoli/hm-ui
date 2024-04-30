@@ -7,3 +7,10 @@ export const notificationError = (message: string) => {
     type: 'error'
   })
 }
+
+export const notificationSuccess = (message: string) => {
+  toast(message, {
+    theme: 'auto',
+    type: 'success'
+  })
+}
