@@ -1,6 +1,5 @@
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import { useVerifyEmail } from '@/composables/useVerifyEmail'
 
 import {
   createRouter,
@@ -45,20 +44,18 @@ const routes = [
     ) => {
       const authStore = useAuthStore()
       const { isVerified } = storeToRefs(authStore)
-
+      const { validateEmail } = authStore
       if (isVerified.value) {
         next({ name: 'dashboard' })
         return
       }
 
-      const { validateEmail } = useVerifyEmail(to.query)
-      const isValid = await validateEmail()
-
-      if (isValid) {
-        next({ name: 'dashboard' })
+      if (to.query.url && to.query.signature) {
+        const backendUrl = `${to.query.url}&signature=${to.query.signature}`
+        await validateEmail(backendUrl)
       }
 
-      next({ name: 'resend-email-verification' })
+      next({ name: 'dashboard' })
     }
   }
 ]

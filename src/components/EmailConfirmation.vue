@@ -2,12 +2,25 @@
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import BaseButton from './BaseButton.vue'
+import fetchData from '@/utils/fetchData'
+import { toast } from 'vue3-toastify'
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
+
+async function resendEmail() {
+  const { axiosError } = await fetchData({
+    method: 'POST',
+    url: 'email/verification-notification'
+  })
+
+  if (!axiosError) {
+    toast.success('Email verification was sent. Check your email.')
+  }
+}
 </script>
 <template>
-  <div class="email-verification-container">
+  <section id="email-confirmation">
     <h3>Verify Your Email</h3>
     <font-awesome-icon icon="fa-regular fa-envelope-open" />
     <p>Check your email for the verification link sent to</p>
@@ -15,11 +28,11 @@ const { user } = storeToRefs(authStore)
       <b>{{ user?.email }}</b>
     </p>
     <p>Not in inbox or spam folder?</p>
-    <BaseButton type="button" bStyle="primary">Resend</BaseButton>
-  </div>
+    <BaseButton type="button" bStyle="primary" @click="resendEmail">Resend</BaseButton>
+  </section>
 </template>
 <style scoped lang="scss">
-.email-verification-container {
+#email-confirmation {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,10 +1,11 @@
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, type LocationQueryValue } from 'vue-router'
 import { defineStore } from 'pinia'
 
 import type { IUserLoginData } from '@/interfaces/IUserLoginData'
 import type { IUser } from '@/interfaces/IUser'
 import fetchData from '@/utils/fetchData'
+import { toast } from 'vue3-toastify'
 
 export const useAuthStore = defineStore(
   'auth',
@@ -30,7 +31,7 @@ export const useAuthStore = defineStore(
     function sendLogin(userloginData: IUserLoginData) {
       return fetchData<IUserLoginData, IUser>({
         method: 'POST',
-        url: 'login',
+        url: 'login?XDEBUG_SESSION_START=PHPSTORM',
         data: userloginData
       })
     }
@@ -62,7 +63,29 @@ export const useAuthStore = defineStore(
       router.push({ name: 'login' })
     }
 
-    return { login, logout, resetStore, user, isAuthenticated, isVerified, error, loading }
+    async function validateEmail(url: string) {
+      const { axiosError } = await fetchData({
+        method: 'GET',
+        url
+      })
+
+      if (user.value && !axiosError) {
+        user.value.is_verified = true
+        toast.success('Successful verification.')
+      }
+    }
+
+    return {
+      login,
+      logout,
+      resetStore,
+      validateEmail,
+      user,
+      isAuthenticated,
+      isVerified,
+      error,
+      loading
+    }
   },
   {
     persist: {}

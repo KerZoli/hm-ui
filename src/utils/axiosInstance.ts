@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { notificationError } from './notifications'
 import { useAuthStore } from '@/stores/auth'
+import { toast } from 'vue3-toastify'
 
 export default function getAxiosInstance(appendApiUrl = true) {
   let baseURL = import.meta.env.VITE_API_BASE_URL
@@ -19,14 +19,14 @@ export default function getAxiosInstance(appendApiUrl = true) {
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response.status === 419) {
+      if ([401, 419].includes(error.response.status)) {
         resetStore()
-        notificationError('Session expired.')
+        toast.error('Session expired. Please login.')
 
         return Promise.reject(error)
       }
 
-      notificationError(error.response?.data?.message ?? 'Something went wrong. Please try again.')
+      toast.error(error.response?.data?.message ?? 'Something went wrong. Please try again.')
 
       return Promise.reject(error)
     }

@@ -1,5 +1,5 @@
 import getAxiosInstance from '@/utils/axiosInstance'
-import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosRequestConfig } from 'axios'
 
 interface Response<U> {
   data: U | null

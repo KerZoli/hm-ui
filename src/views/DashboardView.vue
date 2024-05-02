@@ -11,12 +11,10 @@ const { user } = storeToRefs(authStore)
 <template>
   <AuthenticatedLayout>
     <section id="dashboard-section">
-      <h2>Welcome</h2>
+      <h2>Welcome,</h2>
       <p>{{ user?.name }}</p>
     </section>
-    <section id="email-confirmation">
-      <EmailConfirmation />
-    </section>
+    <EmailConfirmation v-if="!user?.is_verified" />
   </AuthenticatedLayout>
 </template>
 <style lang="scss">
