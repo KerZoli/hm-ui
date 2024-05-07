@@ -7,7 +7,6 @@ type InputType = 'text' | 'password'
 interface BaseInputProps {
   id: string
   name: string
-  label: string
   type: InputType
   required?: boolean
   errors?: ErrorObject[]
@@ -21,10 +20,6 @@ const model = defineModel()
 
 <template>
   <div class="input-container">
-    <label :for="name">
-      {{ label }}
-      <span v-if="!required" class="optional"> (optional)</span>
-    </label>
     <input v-model="model" :type="type" :id="id" :name="name" :class="{ error: hasError }" />
     <span class="error-msg"> {{ hasError ? errors![0].$message : '&nbsp;' }}</span>
   </div>

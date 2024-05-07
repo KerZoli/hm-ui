@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-import { YEARS_TO_DISPLAY, type IBaseDatePickerProps } from '@/types/form/IBaseDatePicker'
 import BaseSelect from './BaseSelect.vue'
 import type { SelectOption } from '@/types/form/IBaseSelect'
 
+const YEARS_TO_DISPLAY = 120
 const currentYear = new Date().getFullYear()
 const years: SelectOption[] = Array.from(
   { length: YEARS_TO_DISPLAY },
@@ -33,12 +33,9 @@ const days = computed<SelectOption[]>(() => {
     (v, i) => i
   ).map((day) => ({ label: day, value: day }))
 })
-
-const props = defineProps<IBaseDatePickerProps>()
 </script>
 <template>
   <div class="date-picker-container">
-    <label for="day">Date of Birth</label>
     <div class="date-picker">
       <BaseSelect v-model="day" id="day" name="day" placeholder="Day" :options="days" />
       <BaseSelect v-model="month" id="month" name="month" placeholder="Month" :options="months" />
