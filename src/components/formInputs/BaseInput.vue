@@ -1,19 +1,8 @@
 <script setup lang="ts">
+import type { IBaseInput } from '@/types/form/IBaseInput'
 import { computed } from 'vue'
-import type { ErrorObject } from '@vuelidate/core'
 
-type InputType = 'text' | 'password'
-
-interface BaseInputProps {
-  id: string
-  name: string
-  type: InputType
-  required?: boolean
-  errors?: ErrorObject[]
-}
-const props = withDefaults(defineProps<BaseInputProps>(), {
-  required: true
-})
+const props = defineProps<IBaseInput>()
 const hasError = computed(() => props.errors && props.errors.length)
 const model = defineModel()
 </script>
@@ -33,7 +22,6 @@ const model = defineModel()
 
   input {
     padding: 10px 5px 10px;
-    margin-top: 10px;
     border: 1px solid $input-border-color;
   }
 }

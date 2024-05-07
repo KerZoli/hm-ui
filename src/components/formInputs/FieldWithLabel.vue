@@ -8,7 +8,9 @@ withDefaults(defineProps<IFieldWithLabel>(), {
 <template>
   <div class="field-container">
     <label :for="id">{{ label }} <span v-if="optional"> (optional)</span></label>
-    <slot></slot>
+    <div class="form-element-wrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -20,6 +22,10 @@ withDefaults(defineProps<IFieldWithLabel>(), {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 12px;
+  }
+
+  .form-element-wrapper {
+    margin-top: 10px;
   }
 }
 </style>

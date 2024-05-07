@@ -1,3 +1,5 @@
+import type { ErrorObject } from '@vuelidate/core'
+
 type OptionValue = string | number
 
 export interface SelectOption {
@@ -11,4 +13,5 @@ export interface IBaseSelect {
   placeholder: string
   options: SelectOption[]
   label?: string
+  errors?: ErrorObject[]
 }

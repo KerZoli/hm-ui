@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import BaseDatePicker from './formInputs/BaseDatePicker.vue'
 import BaseInput from './formInputs/BaseInput.vue'
+import BaseTextArea from './formInputs/BaseTextArea.vue'
+import BaseUploader from './formInputs/BaseUploader.vue'
 import FieldWithLabel from './formInputs/FieldWithLabel.vue'
 </script>
 <template>
   <form class="register-form">
-    <div class="field-container">
+    <div class="field-wrapper">
       <FieldWithLabel id="username" label="username"
         ><BaseInput type="text" id="username" name="username"
       /></FieldWithLabel>
@@ -28,9 +30,18 @@ import FieldWithLabel from './formInputs/FieldWithLabel.vue'
         <BaseInput type="text" id="address" name="address" label="Address" :required="false" />
       </FieldWithLabel>
     </div>
-    <div class="field-container">
+    <div class="field-wrapper">
       <FieldWithLabel id="day" label="Date of Birth">
         <BaseDatePicker />
+      </FieldWithLabel>
+      <FieldWithLabel id="phone" label="Phone">
+        <BaseInput type="text" id="phone" name="phone" label="Phone" />
+      </FieldWithLabel>
+      <FieldWithLabel id="bio" label="Bio" :optional="true">
+        <BaseTextArea />
+      </FieldWithLabel>
+      <FieldWithLabel id="uploader" label="Profile picture" :optional="true">
+        <BaseUploader />
       </FieldWithLabel>
     </div>
   </form>
@@ -40,7 +51,7 @@ import FieldWithLabel from './formInputs/FieldWithLabel.vue'
   display: flex;
   justify-content: space-around;
 
-  .field-container {
+  .field-wrapper {
     width: 500px;
   }
 }

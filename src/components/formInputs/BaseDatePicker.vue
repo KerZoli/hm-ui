@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 
 import BaseSelect from './BaseSelect.vue'
 import type { SelectOption } from '@/types/form/IBaseSelect'
+import type { IBaseDatePicker } from '@/types/form/IBaseDatePicker'
 
 const YEARS_TO_DISPLAY = 120
 const currentYear = new Date().getFullYear()
@@ -33,6 +34,8 @@ const days = computed<SelectOption[]>(() => {
     (v, i) => i
   ).map((day) => ({ label: day, value: day }))
 })
+const props = defineProps<IBaseDatePicker>()
+const hasError = computed(() => props.errors && props.errors.length)
 </script>
 <template>
   <div class="date-picker-container">
@@ -41,6 +44,7 @@ const days = computed<SelectOption[]>(() => {
       <BaseSelect v-model="month" id="month" name="month" placeholder="Month" :options="months" />
       <BaseSelect v-model="year" id="year" name="year" placeholder="Year" :options="years" />
     </div>
+    <span class="error-msg"> {{ hasError ? errors![0].$message : '&nbsp;' }}</span>
   </div>
 </template>
 <style scoped lang="scss">
@@ -49,7 +53,6 @@ const days = computed<SelectOption[]>(() => {
   flex-direction: column;
 
   .date-picker {
-    margin-top: 10px;
     display: flex;
     gap: 10px;
   }

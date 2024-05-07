@@ -8,7 +8,9 @@ const model = defineModel()
   <label v-if="label" :for="id">{{ label }}</label>
   <select :id="id" :name="name" v-model="model">
     <option :value="null" disabled selected hidden>{{ placeholder }}</option>
-    <option v-for="option in options" :value="option.value">{{ option.label }}</option>
+    <option v-for="option in options" :key="option.value" :value="option.value">
+      {{ option.label }}
+    </option>
   </select>
 </template>
 <style scoped lang="scss">
