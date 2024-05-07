@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
-import BaseButton from './BaseButton.vue'
 import fetchData from '@/utils/fetchData'
 import { toast } from 'vue3-toastify'
+import BaseButton from './formInputs/BaseButton.vue'
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)

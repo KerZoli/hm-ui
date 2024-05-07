@@ -6,9 +6,9 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import { loginFormRules } from '@/utils/validationRules'
 
-import BaseInput from '@/components/BaseInput.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseLink from '@/components/BaseLink.vue'
+import BaseInput from '@/components/formInputs/BaseInput.vue'
+import BaseButton from '@/components/formInputs/BaseButton.vue'
+import BaseLink from '@/components/formInputs/BaseLink.vue'
 
 const router = useRouter()
 

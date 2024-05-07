@@ -9,16 +9,22 @@ interface BaseInputProps {
   name: string
   label: string
   type: InputType
+  required?: boolean
   errors?: ErrorObject[]
 }
-const props = defineProps<BaseInputProps>()
+const props = withDefaults(defineProps<BaseInputProps>(), {
+  required: true
+})
 const hasError = computed(() => props.errors && props.errors.length)
 const model = defineModel()
 </script>
 
 <template>
   <div class="input-container">
-    <label :for="name">{{ label }}</label>
+    <label :for="name">
+      {{ label }}
+      <span v-if="!required" class="optional"> (optional)</span>
+    </label>
     <input v-model="model" :type="type" :id="id" :name="name" :class="{ error: hasError }" />
     <span class="error-msg"> {{ hasError ? errors![0].$message : '&nbsp;' }}</span>
   </div>
@@ -30,16 +36,10 @@ const model = defineModel()
   flex-direction: column;
   width: 100%;
 
-  label {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-
   input {
     padding: 10px 5px 10px;
     margin-top: 10px;
-    border: 1px solid gainsboro;
+    border: 1px solid $input-border-color;
   }
 }
 </style>

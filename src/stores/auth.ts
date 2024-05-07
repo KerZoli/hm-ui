@@ -2,8 +2,8 @@ import { computed, ref } from 'vue'
 import { useRouter, type LocationQueryValue } from 'vue-router'
 import { defineStore } from 'pinia'
 
-import type { IUserLoginData } from '@/interfaces/IUserLoginData'
-import type { IUser } from '@/interfaces/IUser'
+import type { IUserLoginData } from '@/types/IUserLoginData'
+import type { IUser } from '@/types/IUser'
 import fetchData from '@/utils/fetchData'
 import { toast } from 'vue3-toastify'
 
@@ -16,7 +16,6 @@ export const useAuthStore = defineStore(
     const router = useRouter()
 
     const isAuthenticated = computed(() => !!user.value)
-
     const isVerified = computed(() => user.value && user.value.is_verified === true)
 
     function initCsrfProtection() {
