@@ -8,10 +8,10 @@ export interface SelectOption {
 }
 
 export interface IBaseSelect {
-  id: string
-  name: string
   placeholder: string
   options: SelectOption[]
   label?: string
+  optional?: boolean
   errors?: ErrorObject[]
+  displayErrors: boolean
 }

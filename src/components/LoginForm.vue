@@ -6,10 +6,9 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import { loginFormRules } from '@/utils/validationRules'
 
-import BaseInput from '@/components/formInputs/BaseInput.vue'
-import BaseButton from '@/components/formInputs/BaseButton.vue'
-import BaseLink from '@/components/formInputs/BaseLink.vue'
-import FieldWithLabel from './formInputs/FieldWithLabel.vue'
+import BaseInput from '@/components/formElements/BaseInput.vue'
+import BaseButton from '@/components/formElements/BaseButton.vue'
+import BaseLink from '@/components/formElements/BaseLink.vue'
 
 const router = useRouter()
 
@@ -39,24 +38,22 @@ const loginUser = async () => {
   <section class="login-form">
     <form class="form" @submit.prevent="loginUser">
       <div class="input-elements">
-        <FieldWithLabel id="username" label="Username">
-          <BaseInput
-            v-model="loginForm.email"
-            type="text"
-            id="username"
-            name="username"
-            :errors="v$.email.$errors"
-          />
-        </FieldWithLabel>
-        <FieldWithLabel id="password" label="Password">
-          <BaseInput
-            v-model="loginForm.password"
-            type="password"
-            id="password"
-            name="pasword"
-            :errors="v$.password.$errors"
-          />
-        </FieldWithLabel>
+        <BaseInput
+          v-model="loginForm.email"
+          type="text"
+          id="username"
+          name="username"
+          label="Username"
+          :errors="v$.email.$errors"
+        />
+        <BaseInput
+          v-model="loginForm.password"
+          type="password"
+          id="password"
+          name="pasword"
+          label="Password"
+          :errors="v$.password.$errors"
+        />
       </div>
       <p>
         Don't have an account? Please

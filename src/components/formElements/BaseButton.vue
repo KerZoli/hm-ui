@@ -9,7 +9,7 @@ interface BaseButtonProps {
   isDisabled?: boolean
 }
 
-const props = defineProps<BaseButtonProps>()
+defineProps<BaseButtonProps>()
 </script>
 <template>
   <button :class="bStyle" :disabled="isDisabled">

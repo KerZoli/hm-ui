@@ -1,6 +1,6 @@
 import type { ErrorObject } from '@vuelidate/core'
 
-export interface IBaseDatePicker {
+export interface IBaseTextArea {
   label?: string
   optional?: boolean
   errors?: ErrorObject[]

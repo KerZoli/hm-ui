@@ -1,48 +1,33 @@
 <script setup lang="ts">
-import BaseDatePicker from './formInputs/BaseDatePicker.vue'
-import BaseInput from './formInputs/BaseInput.vue'
-import BaseTextArea from './formInputs/BaseTextArea.vue'
-import BaseUploader from './formInputs/BaseUploader.vue'
-import FieldWithLabel from './formInputs/FieldWithLabel.vue'
+import BaseDatePicker from './formElements/BaseDatePicker.vue'
+import BaseInput from './formElements/BaseInput.vue'
+import BaseTextArea from './formElements/BaseTextArea.vue'
 </script>
 <template>
   <form class="register-form">
     <div class="field-wrapper">
-      <FieldWithLabel id="username" label="username"
-        ><BaseInput type="text" id="username" name="username"
-      /></FieldWithLabel>
-
-      <FieldWithLabel id="password" label="password">
-        <BaseInput type="text" id="password" name="password" />
-      </FieldWithLabel>
-      <FieldWithLabel id="confirm_password" label="Confirm password">
-        <BaseInput
-          type="password"
-          id="confirm_password"
-          name="confirm_password"
-          label="Confirm password"
-        />
-      </FieldWithLabel>
-      <FieldWithLabel id="email" label="Email">
-        <BaseInput type="text" id="email" name="email" label="Email" />
-      </FieldWithLabel>
-      <FieldWithLabel id="address" label="Address" :optional="true">
-        <BaseInput type="text" id="address" name="address" label="Address" :required="false" />
-      </FieldWithLabel>
+      <BaseInput type="text" id="username" name="username" label="Username" />
+      <BaseInput type="text" id="password" name="password" label="Password" />
+      <BaseInput
+        type="password"
+        id="confirm_password"
+        name="confirm_password"
+        label="Confirm password"
+      />
+      <BaseInput type="text" id="email" name="email" label="Email" />
+      <BaseInput type="text" id="address" name="address" label="Address" :optional="true" />
     </div>
     <div class="field-wrapper">
-      <FieldWithLabel id="day" label="Date of Birth">
-        <BaseDatePicker />
-      </FieldWithLabel>
-      <FieldWithLabel id="phone" label="Phone">
-        <BaseInput type="text" id="phone" name="phone" label="Phone" />
-      </FieldWithLabel>
-      <FieldWithLabel id="bio" label="Bio" :optional="true">
-        <BaseTextArea />
-      </FieldWithLabel>
-      <FieldWithLabel id="uploader" label="Profile picture" :optional="true">
-        <BaseUploader />
-      </FieldWithLabel>
+      <BaseDatePicker label="Date of Birth" />
+      <BaseInput type="text" id="phone" name="phone" label="Phone" />
+      <BaseTextArea id="bio" name="bio" label="Bio" :rows="8" :optional="true" />
+      <BaseInput
+        type="file"
+        id="uploader"
+        name="uploader"
+        label="Profile picture"
+        :optional="true"
+      />
     </div>
   </form>
 </template>
