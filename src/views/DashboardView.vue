@@ -2,25 +2,26 @@
 import { useAuthStore } from '@/stores/auth'
 
 import EmailConfirmation from '@/components/EmailConfirmation.vue'
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue'
 import { storeToRefs } from 'pinia'
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 </script>
 <template>
-  <AuthenticatedLayout>
-    <section id="dashboard-section">
-      <h2>Welcome,</h2>
-      <p>{{ user?.name }}</p>
-    </section>
-    <EmailConfirmation v-if="!user?.is_verified" />
-  </AuthenticatedLayout>
+  <section id="dashboard-section">
+    <h2>Welcome,</h2>
+    <p>{{ user?.name }}</p>
+  </section>
+  <EmailConfirmation v-if="!user?.is_verified" />
 </template>
 <style lang="scss">
 #dashboard-section {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  @include bp-large {
+    padding-top: 150px;
+  }
 }
 </style>

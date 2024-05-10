@@ -1,18 +1,14 @@
 <script setup lang="ts">
-type BtnStyle = 'primary' | 'default'
-
-type BtnType = 'button' | 'submit' | 'reset'
+type BtnVariant = 'primary' | 'default'
 
 interface BaseButtonProps {
-  type: BtnType
-  bStyle?: BtnStyle
-  isDisabled?: boolean
+  variant: BtnVariant
 }
 
 defineProps<BaseButtonProps>()
 </script>
 <template>
-  <button :class="bStyle" :disabled="isDisabled">
+  <button :class="variant">
     <slot> </slot>
   </button>
 </template>

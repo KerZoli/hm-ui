@@ -26,6 +26,6 @@ defineOptions({
 
 <style scoped lang="scss">
 input {
-  padding: 10px 5px 10px;
+  padding: 14px 5px;
 }
 </style>

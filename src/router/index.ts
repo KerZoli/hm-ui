@@ -5,13 +5,14 @@ import {
   createRouter,
   createWebHistory,
   type NavigationGuardNext,
-  type RouteLocationNormalized
+  type RouteLocationNormalized,
+  type RouteRecordRaw
 } from 'vue-router'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '',
-    name: 'auth',
+    name: 'guest',
     meta: { requiresAuth: false },
     children: [
       {
@@ -28,9 +29,16 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: 'auth',
     meta: { requiresAuth: true },
-    component: () => import('@/views/DashboardView.vue')
+    component: () => import('@/layouts/AuthenticatedLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'dashboard',
+        component: () => import('@/views/DashboardView.vue')
+      }
+    ]
   },
   {
     path: '/verify-email',

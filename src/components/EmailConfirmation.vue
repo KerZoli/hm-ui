@@ -3,7 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import fetchData from '@/utils/fetchData'
 import { toast } from 'vue3-toastify'
-import BaseButton from './formInputs/BaseButton.vue'
+import BaseButton from './formElements/BaseButton.vue'
 
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
@@ -28,7 +28,7 @@ async function resendEmail() {
       <b>{{ user?.email }}</b>
     </p>
     <p>Not in inbox or spam folder?</p>
-    <BaseButton type="button" bStyle="primary" @click="resendEmail">Resend</BaseButton>
+    <BaseButton type="button" variant="primary" @click="resendEmail">Resend</BaseButton>
   </section>
 </template>
 <style scoped lang="scss">

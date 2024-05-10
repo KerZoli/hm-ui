@@ -6,7 +6,7 @@ interface NavigationItemProps {
 defineProps<NavigationItemProps>()
 </script>
 <template>
-  <router-link :to="{ name: name }"><slot></slot></router-link>
+  <RouterLink :to="{ name: name }"><slot></slot></RouterLink>
 </template>
 <style scoped lang="scss">
 a {

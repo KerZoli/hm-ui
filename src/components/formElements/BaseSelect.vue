@@ -30,7 +30,7 @@ defineOptions({
 </template>
 <style scoped lang="scss">
 select {
-  padding: 8px;
+  padding: 14px;
   background-color: #ffffff;
 }
 </style>

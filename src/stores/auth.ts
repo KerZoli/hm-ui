@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { useRouter, type LocationQueryValue } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 
 import type { IUserLoginData } from '@/types/IUserLoginData'
