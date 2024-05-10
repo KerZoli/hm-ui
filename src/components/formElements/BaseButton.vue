@@ -1,11 +1,7 @@
 <script setup lang="ts">
-type BtnVariant = 'primary' | 'default'
+import type { IBaseButton } from '@/types/form/IBaseButton'
 
-interface BaseButtonProps {
-  variant: BtnVariant
-}
-
-defineProps<BaseButtonProps>()
+defineProps<IBaseButton>()
 </script>
 <template>
   <button :class="variant">
