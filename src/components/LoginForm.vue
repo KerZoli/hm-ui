@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
-import { loginFormRules } from '@/utils/validationRules'
+import { reactive } from 'vue';
+import { useVuelidate } from '@vuelidate/core';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+import { loginFormRules } from '@/utils/validationRules';
 
-import BaseInput from '@/components/formElements/BaseInput.vue'
-import BaseButton from '@/components/formElements/BaseButton.vue'
-import BaseLink from '@/components/formElements/BaseLink.vue'
+import BaseInput from '@/components/formElements/BaseInput.vue';
+import BaseButton from '@/components/formElements/BaseButton.vue';
+import BaseLink from '@/components/formElements/BaseLink.vue';
 
-const router = useRouter()
+const router = useRouter();
 
 const loginForm = reactive({
   email: '',
   password: ''
-})
+});
 
-const v$ = useVuelidate(loginFormRules, loginForm)
-const authStore = useAuthStore()
-const { error } = storeToRefs(authStore)
-const { login } = authStore
+const v$ = useVuelidate(loginFormRules, loginForm);
+const authStore = useAuthStore();
+const { error } = storeToRefs(authStore);
+const { login } = authStore;
 
 const loginUser = async () => {
-  const isFormValid = await v$.value.$validate()
+  const isFormValid = await v$.value.$validate();
 
   if (isFormValid) {
-    await login(loginForm)
+    await login(loginForm);
     if (!error.value) {
-      router.push({ name: 'dashboard' })
+      router.push({ name: 'dashboard' });
     }
   }
-}
+};
 </script>
 
 <template>

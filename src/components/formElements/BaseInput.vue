@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import type { IBaseInput } from '@/types/form/IBaseInput'
-import { computed } from 'vue'
-import ErrorMsg from './ErrorMsg.vue'
-import FormElementWrapper from './FormElementWrapper.vue'
-import FormElementLabel from './FormElementLabel.vue'
+import type { IBaseInput } from '@/types/form/IBaseInput';
+import { computed } from 'vue';
+import ErrorMsg from './ErrorMsg.vue';
+import FormElementWrapper from './FormElementWrapper.vue';
+import FormElementLabel from './FormElementLabel.vue';
 
 const props = withDefaults(defineProps<IBaseInput>(), {
   optional: false
-})
+});
 
-const hasError = computed(() => props.errors && props.errors.length)
-const model = defineModel()
+const hasError = computed(() => props.errors && props.errors.length);
+const model = defineModel();
 defineOptions({
   inheritAttrs: false
-})
+});
 </script>
 
 <template>

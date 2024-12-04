@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import BaseButton from './formElements/BaseButton.vue'
-import BaseDatePicker from './formElements/BaseDatePicker.vue'
-import BaseInput from './formElements/BaseInput.vue'
-import BaseTextArea from './formElements/BaseTextArea.vue'
-import TwoColumnsLayout from '@/layouts/TwoColumnsLayout.vue'
+import BaseButton from './formElements/BaseButton.vue';
+import BaseDatePicker from './formElements/BaseDatePicker.vue';
+import BaseInput from './formElements/BaseInput.vue';
+import BaseTextArea from './formElements/BaseTextArea.vue';
+import TwoColumnsLayout from '@/layouts/TwoColumnsLayout.vue';
+
+const registerUser = async () => {
+  const isFormValid = await v$.value.$validate();
+
+  console.log(isFormValid);
+};
 </script>
 <template>
-  <form class="register-form">
+  <form class="register-form" @submit.prevent="registerUser">
     <TwoColumnsLayout>
       <template #left>
         <BaseInput type="text" id="username" name="username" label="Username" />
-        <BaseInput type="text" id="password" name="password" label="Password" />
+        <BaseInput type="password" id="password" name="password" label="Password" />
         <BaseInput
           type="password"
           id="confirm_password"
