@@ -12,8 +12,18 @@ import {
 const routes: RouteRecordRaw[] = [
   {
     path: '',
-    name: 'guest',
+    name: 'home',
     meta: { requiresAuth: false },
+    redirect: to => {
+      const authStore = useAuthStore()
+      const { isAuthenticated } = storeToRefs(authStore)
+
+      if (isAuthenticated.value) {
+        return 'dashboard';
+      }
+
+      return 'login';
+    },
     children: [
       {
         path: '/login',
@@ -44,7 +54,7 @@ const routes: RouteRecordRaw[] = [
     path: '/verify-email',
     name: 'email-verify',
     meta: { requiresAuth: true },
-    component: () => {},
+    component: () => { },
     beforeEnter: async (
       to: RouteLocationNormalized,
       from: RouteLocationNormalized,
@@ -81,9 +91,6 @@ router.beforeEach(async (to) => {
     return { name: 'login' }
   }
 
-  if (isAuthenticated.value && !to.meta.requiresAuth) {
-    return { name: 'dashboard' }
-  }
 })
 
 export default router

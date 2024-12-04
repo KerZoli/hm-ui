@@ -1,14 +1,14 @@
 import getAxiosInstance from '@/utils/axiosInstance'
 import type { AxiosError, AxiosRequestConfig } from 'axios'
 
-interface Response<U> {
-  data: U | null
+export interface Response<T> {
+  data: T | null
   axiosError: AxiosError | null
 }
 
 export default async function fetchData<T = any, U = any>(
   options: AxiosRequestConfig<T>,
-  appendApiUrl: boolean = true
+  appendApiUrl = true
 ): Promise<Response<U>> {
   try {
     const axiosInstance = getAxiosInstance(appendApiUrl)
