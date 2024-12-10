@@ -2,10 +2,10 @@ import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { defineStore } from 'pinia';
 
-import type { IUserLoginData } from '@/types/IUserLoginData';
 import type { IUser } from '@/types/IUser';
 import { toast } from 'vue3-toastify';
 import AuthService from '@/services/AuthService';
+import type { ILoginForm } from '@/types/form/ILoginForm';
 
 export const useAuthStore = defineStore(
   'auth',
@@ -24,7 +24,7 @@ export const useAuthStore = defineStore(
       loading.value = false;
     }
 
-    async function login(userloginData: IUserLoginData) {
+    async function login(userloginData: ILoginForm) {
       loading.value = true;
       const { axiosError } = await AuthService.initCsrfProtection();
       if (!axiosError) {
