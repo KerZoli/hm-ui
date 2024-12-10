@@ -45,11 +45,11 @@ defineProps<IBaseDatePicker>();
     <FormElementLabel :id="String($attrs.id)" :label="label" :optional="optional" v-if="label" />
     <div class="date-picker">
       <BaseSelect
-        v-model="day"
-        id="day"
-        name="day"
-        placeholder="Day"
-        :options="days"
+        v-model="year"
+        id="year"
+        name="year"
+        placeholder="Year"
+        :options="years"
         :errors="errors"
         :display-errors="false"
       />
@@ -63,11 +63,11 @@ defineProps<IBaseDatePicker>();
         :display-errors="false"
       />
       <BaseSelect
-        v-model="year"
-        id="year"
-        name="year"
-        placeholder="Year"
-        :options="years"
+        v-model="day"
+        id="day"
+        name="day"
+        placeholder="Day"
+        :options="days"
         :errors="errors"
         :display-errors="false"
       />

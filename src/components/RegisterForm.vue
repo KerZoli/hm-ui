@@ -45,7 +45,7 @@ const registerUser = async () => {
           name="confirm_password"
           label="Confirm password"
           v-model="form.password_confirmation"
-          :errors="v$.confirm_password.$errors"
+          :errors="v$.password_confirmation.$errors"
         />
         <BaseInput
           type="text"
