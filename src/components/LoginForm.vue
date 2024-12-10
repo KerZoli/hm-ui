@@ -18,7 +18,6 @@ const { login } = authStore;
 
 const loginUser = async () => {
   const isFormValid = await validateForm();
-
   if (isFormValid) {
     await login(form);
     if (!error.value) {

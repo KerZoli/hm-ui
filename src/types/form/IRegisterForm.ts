@@ -1,7 +1,7 @@
 export interface IRegisterForm {
   username: string;
   password: string;
-  confirm_password: string;
+  password_confirmation: string;
   email: string;
   address?: string;
   date_of_birth?: string;

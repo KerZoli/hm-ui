@@ -8,7 +8,7 @@ export function userRegisterForm() {
   const form = reactive<IRegisterForm>({
     username: '',
     password: '',
-    confirm_password: '',
+    password_confirmation: '',
     email: '',
     address: '',
     date_of_birth: '',
@@ -24,7 +24,7 @@ export function userRegisterForm() {
     password: {
       required: helpers.withMessage(validationMessages.required('Password'), required)
     },
-    confirm_password: {
+    password_confirmation: {
       required: helpers.withMessage(validationMessages.required('Confirm password'), required),
       sameAsPassword: sameAs(form.password)
     },

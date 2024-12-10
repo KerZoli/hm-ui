@@ -5,12 +5,17 @@ import BaseDatePicker from './formElements/BaseDatePicker.vue';
 import BaseInput from './formElements/BaseInput.vue';
 import BaseTextArea from './formElements/BaseTextArea.vue';
 import TwoColumnsLayout from '@/layouts/TwoColumnsLayout.vue';
+import ClientRegisterService from '@/services/ClientRegisterService';
 
 const { form, v$, validateForm } = userRegisterForm();
 
 const registerUser = async () => {
   const isFormValid = await validateForm();
 
+  if (isFormValid) {
+    const { data } = await ClientRegisterService.register(form);
+    console.log(data);
+  }
   console.log(isFormValid);
 };
 </script>
@@ -39,7 +44,7 @@ const registerUser = async () => {
           id="confirm_password"
           name="confirm_password"
           label="Confirm password"
-          v-model="form.confirm_password"
+          v-model="form.password_confirmation"
           :errors="v$.confirm_password.$errors"
         />
         <BaseInput
@@ -47,10 +52,17 @@ const registerUser = async () => {
           id="email"
           name="email"
           label="Email"
-          v-mode="form.email"
+          v-model="form.email"
           :errors="v$.email.$errors"
         />
-        <BaseInput type="text" id="address" name="address" label="Address" :optional="true" />
+        <BaseInput
+          type="text"
+          id="address"
+          name="address"
+          label="Address"
+          v-model="form.address"
+          :optional="true"
+        />
       </template>
       <template #right>
         <BaseDatePicker
@@ -66,12 +78,20 @@ const registerUser = async () => {
           v-model="form.phone"
           :errors="v$.phone.$errors"
         />
-        <BaseTextArea id="bio" name="bio" label="Bio" :rows="9" :optional="true" />
+        <BaseTextArea
+          id="bio"
+          name="bio"
+          label="Bio"
+          :rows="9"
+          v-model="form.bio"
+          :optional="true"
+        />
         <BaseInput
           type="file"
           id="uploader"
           name="uploader"
           label="Profile picture"
+          v-model="form.profile_picture"
           :optional="true"
         />
         <BaseButton type="submit" variant="primary" id="register">Register</BaseButton>

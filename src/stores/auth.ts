@@ -27,6 +27,7 @@ export const useAuthStore = defineStore(
     async function login(userloginData: ILoginForm) {
       loading.value = true;
       const { axiosError } = await AuthService.initCsrfProtection();
+
       if (!axiosError) {
         const { data, axiosError } = await AuthService.login(userloginData);
         user.value = data;

@@ -1,36 +1,44 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue';
 
-import BaseSelect from './BaseSelect.vue'
-import ErrorMsg from './ErrorMsg.vue'
-import type { SelectOption } from '@/types/form/IBaseSelect'
-import type { IBaseDatePicker } from '@/types/form/IBaseDatePicker'
-import { getMonths, getYears } from '@/config/datepicker'
-import FormElementWrapper from './FormElementWrapper.vue'
-import FormElementLabel from './FormElementLabel.vue'
+import BaseSelect from './BaseSelect.vue';
+import ErrorMsg from './ErrorMsg.vue';
+import type { SelectOption } from '@/types/form/IBaseSelect';
+import type { IBaseDatePicker } from '@/types/form/IBaseDatePicker';
+import { getMonths, getYears } from '@/config/datepicker';
+import FormElementWrapper from './FormElementWrapper.vue';
+import FormElementLabel from './FormElementLabel.vue';
 
-const years = getYears()
-const months = getMonths()
+const model = defineModel<string>();
+const years = getYears();
+const months = getMonths();
 
-const year = ref<number | null>(null)
-const month = ref<number | null>(null)
-const day = ref<number | null>(null)
+const year = ref<number | null>(null);
+const month = ref<number | null>(null);
+const day = ref<number | null>(null);
 
 const days = computed<SelectOption[]>(() => {
   if (!year.value || !month.value) {
-    return []
+    return [];
   }
-  const currentMonthDays = new Date(year.value, month.value, 0).getDate()
+  const currentMonthDays = new Date(year.value, month.value, 0).getDate();
 
   return Array.from(
     {
       length: currentMonthDays
     },
     (v, i) => i + 1
-  ).map((day) => ({ label: day, value: day }))
-})
+  ).map((day) => ({ label: day, value: day }));
+});
 
-defineProps<IBaseDatePicker>()
+watchEffect(() => {
+  if (!year.value || !month.value || !day.value) {
+    return;
+  }
+  model.value = `${year.value}-${month.value.toString().padStart(2, '0')}-${day.value}`;
+});
+
+defineProps<IBaseDatePicker>();
 </script>
 <template>
   <FormElementWrapper>
