@@ -11,10 +11,10 @@ export function userRegisterForm() {
     password_confirmation: '',
     email: '',
     address: '',
-    date_of_birth: '',
+    birth_date: '',
     phone: '',
     bio: '',
-    profile_picture: null
+    avatar: null
   });
 
   const rules = computed(() => ({
@@ -32,7 +32,7 @@ export function userRegisterForm() {
       required: helpers.withMessage(validationMessages.required('Email'), required),
       email: helpers.withMessage(validationMessages.email('Email'), email)
     },
-    date_of_birth: {
+    birth_date: {
       required: helpers.withMessage(validationMessages.required('Date of birth'), required)
     },
     phone: {

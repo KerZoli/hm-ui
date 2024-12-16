@@ -13,13 +13,11 @@ export default async function fetchData<T = any, U = any>(
   try {
     const axiosInstance = getAxiosInstance(appendApiUrl);
     const response = await axiosInstance(options);
-    console.log(response);
     return {
       data: response.data,
       axiosError: null
     };
   } catch (error) {
-    console.log('xxxx');
     const axiosError = error as AxiosError;
     return {
       data: null,

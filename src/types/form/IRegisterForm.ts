@@ -4,8 +4,8 @@ export interface IRegisterForm {
   password_confirmation: string;
   email: string;
   address?: string;
-  date_of_birth?: string;
+  birth_date?: string;
   phone?: string;
   bio?: string;
-  profile_picture?: File | null;
+  avatar?: File | null;
 }

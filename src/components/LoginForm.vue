@@ -32,12 +32,12 @@ const loginUser = async () => {
     <form class="form" @submit.prevent="loginUser">
       <div class="input-elements">
         <BaseInput
-          v-model="form.email"
+          v-model="form.username"
           type="text"
           id="username"
           name="username"
           label="Username"
-          :errors="v$.email.$errors"
+          :errors="v$.username.$errors"
         />
         <BaseInput
           v-model="form.password"

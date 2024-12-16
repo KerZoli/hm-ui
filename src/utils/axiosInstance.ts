@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/stores/auth';
 import { toast } from 'vue3-toastify';
+import AuthService from '@/services/AuthService';
 
 export default function getAxiosInstance(appendApiUrl = true) {
   let baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -9,7 +10,6 @@ export default function getAxiosInstance(appendApiUrl = true) {
   }
 
   const { resetStore } = useAuthStore();
-  console.log(baseURL);
   const axiosInstance = axios.create({
     baseURL: baseURL,
     withXSRFToken: true,
@@ -18,9 +18,17 @@ export default function getAxiosInstance(appendApiUrl = true) {
 
   axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => {
-      console.log(error);
-      if ([401, 419].includes(error.response.status)) {
+    async (error) => {
+      if (error.response.status === 419) {
+        try {
+          await AuthService.initCsrfProtection();
+          return Promise.resolve();
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
+
+      if (error.response.status === 401) {
         resetStore();
         toast.error('Session expired. Please login.');
 

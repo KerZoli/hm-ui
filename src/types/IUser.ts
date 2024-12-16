@@ -1,5 +1,5 @@
 export interface IUser {
-  email: string
-  name: string
-  is_verified: boolean
+  email: string;
+  username: string;
+  is_verified: boolean;
 }

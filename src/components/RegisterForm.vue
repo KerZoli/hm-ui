@@ -9,14 +9,17 @@ import ClientRegisterService from '@/services/ClientRegisterService';
 
 const { form, v$, validateForm } = userRegisterForm();
 
+const handleAvatarChange = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  form.avatar = input?.files?.[0] || null;
+};
+
 const registerUser = async () => {
   const isFormValid = await validateForm();
 
   if (isFormValid) {
     const { data } = await ClientRegisterService.register(form);
-    console.log(data);
   }
-  console.log(isFormValid);
 };
 </script>
 <template>
@@ -67,8 +70,8 @@ const registerUser = async () => {
       <template #right>
         <BaseDatePicker
           label="Date of Birth"
-          v-model="form.date_of_birth"
-          :errors="v$.date_of_birth.$errors"
+          v-model="form.birth_date"
+          :errors="v$.birth_date.$errors"
         />
         <BaseInput
           type="text"
@@ -91,8 +94,8 @@ const registerUser = async () => {
           id="uploader"
           name="uploader"
           label="Profile picture"
-          v-model="form.profile_picture"
           :optional="true"
+          @change="handleAvatarChange"
         />
         <BaseButton type="submit" variant="primary" id="register">Register</BaseButton>
       </template>

@@ -5,14 +5,13 @@ import type { ILoginForm } from '@/types/form/ILoginForm';
 
 export function useLoginForm() {
   const form = reactive<ILoginForm>({
-    email: '',
+    username: '',
     password: ''
   });
 
   const rules = {
-    email: {
-      required: helpers.withMessage('Email is required.', required),
-      email: helpers.withMessage('Invalid email.', email)
+    username: {
+      required: helpers.withMessage('Username is required.', required)
     },
     password: {
       required: helpers.withMessage('Password is required.', required)
