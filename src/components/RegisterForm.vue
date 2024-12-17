@@ -6,6 +6,8 @@ import BaseInput from './formElements/BaseInput.vue';
 import BaseTextArea from './formElements/BaseTextArea.vue';
 import TwoColumnsLayout from '@/layouts/TwoColumnsLayout.vue';
 import ClientRegisterService from '@/services/ClientRegisterService';
+import router from '@/router';
+import { toast } from 'vue3-toastify';
 
 const { form, v$, validateForm } = userRegisterForm();
 
@@ -18,7 +20,12 @@ const registerUser = async () => {
   const isFormValid = await validateForm();
 
   if (isFormValid) {
-    const { data } = await ClientRegisterService.register(form);
+    const { axiosError } = await ClientRegisterService.register(form);
+
+    if (!axiosError) {
+      toast.success('Successfully registered.');
+      router.push({ name: 'login' });
+    }
   }
 };
 </script>

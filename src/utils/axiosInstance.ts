@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '@/stores/auth';
 import { toast } from 'vue3-toastify';
-import AuthService from '@/services/AuthService';
 import router from '@/router';
 
 export default function getAxiosInstance(appendApiUrl = true) {
@@ -21,24 +20,14 @@ export default function getAxiosInstance(appendApiUrl = true) {
     (response) => response,
     async (error) => {
       if ([401, 419].includes(error.response.status) && user) {
-        if (user) {
-          resetStore();
-          toast.error('Session expired. Please login.');
-          router.push({ name: 'login' });
+        resetStore();
+        toast.error('Session expired. Please login.');
+        router.push({ name: 'login' });
 
-          return Promise.reject(error);
-        } else {
-          try {
-            await AuthService.initCsrfProtection();
-
-            return Promise.resolve();
-          } catch (error) {
-            return Promise.reject(error);
-          }
-        }
+        return Promise.reject(error);
       }
 
-      toast.error(error.response?.data?.message ?? 'Something went wrong. Please try again.');
+      toast.error(error.response?.data?.message || 'Something went wrong. Please try again.');
 
       return Promise.reject(error);
     }
