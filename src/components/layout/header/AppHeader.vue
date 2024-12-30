@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavigationList from '@/components/header/navigation/NavigationList.vue'
-import AppLogo from './AppLogo.vue'
+import AppLogo from './AppLogo.vue';
+import NavigationList from './navigation/NavigationList.vue';
 </script>
 <template>
   <header>

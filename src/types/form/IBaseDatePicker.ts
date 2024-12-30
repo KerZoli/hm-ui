@@ -1,7 +1,7 @@
-import type { ErrorObject } from '@vuelidate/core'
+import type { ErrorObject } from '@vuelidate/core';
 
 export interface IBaseDatePicker {
-  label?: string
-  optional?: boolean
-  errors?: ErrorObject[]
+  label?: string;
+  optional?: boolean;
+  errors?: ErrorObject[];
 }

@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
-import fetchData from '@/utils/fetchData'
-import { toast } from 'vue3-toastify'
-import BaseButton from './formElements/BaseButton.vue'
+import { useAuthStore } from '@/stores/auth';
+import { storeToRefs } from 'pinia';
+import fetchData from '@/utils/fetchData';
+import { toast } from 'vue3-toastify';
+import BaseButton from './formElements/BaseButton.vue';
 
-const authStore = useAuthStore()
-const { user } = storeToRefs(authStore)
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 
 async function resendEmail() {
   const { axiosError } = await fetchData({
     method: 'POST',
     url: 'email/verification-notification'
-  })
+  });
 
   if (!axiosError) {
-    toast.success('Email verification was sent. Check your email.')
+    toast.success('Email verification was sent. Check your email.');
   }
 }
 </script>

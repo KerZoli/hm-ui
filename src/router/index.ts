@@ -39,7 +39,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/dashboard',
-    name: 'auth',
+    name: 'dashboard',
     meta: { requiresAuth: true },
     component: () => import('@/layouts/AuthenticatedLayout.vue'),
     children: [
@@ -47,6 +47,19 @@ const routes: RouteRecordRaw[] = [
         path: '',
         name: 'dashboard',
         component: () => import('@/views/DashboardView.vue')
+      }
+    ]
+  },
+  {
+    path: '/list',
+    name: 'list',
+    meta: { requiresAuth: false },
+    component: () => import('@/layouts/AuthenticatedLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'list',
+        component: () => import('@/views/ListView.vue')
       }
     ]
   },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppHeader from '@/components/header/AppHeader.vue'
-import MainContainer from './partials/MainContainer.vue'
+import AppHeader from '@/components/layout/header/AppHeader.vue';
+import MainContainer from './partials/MainContainer.vue';
 </script>
 <template>
   <AppHeader />
